@@ -1,0 +1,8 @@
+{
+  "name": "Benlley",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "738bd7b1"
+}

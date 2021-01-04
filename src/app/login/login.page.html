@@ -1,0 +1,43 @@
+<ion-content class="auth-page">
+  <div style="display: flex;" class="login-logo ion-align-items-center ion-justify-content-center">
+    <img src="assets/img/logo.png" alt="Smartsol logo">
+  </div>
+
+  <div class="ion-padding">
+    <form #loginForm="ngForm" novalidate>
+      <ion-list>
+        <ion-item>
+          <ion-label position="stacked" class="ion-color-primary-contrast">Tên đăng nhập</ion-label>
+          <ion-input [(ngModel)]="login.username" name="username" type="text" #username="ngModel" spellcheck="false"
+            autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+
+        <ion-text color="danger">
+          <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
+            Vui lòng nhập tên đăng nhập
+          </p>
+        </ion-text>
+
+        <ion-item>
+          <ion-label position="stacked">Mật khẩu</ion-label>
+          <ion-input [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required>
+          </ion-input>
+        </ion-item>
+
+        <ion-text color="danger">
+          <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
+            Vui lòng nhập mật khẩu
+          </p>
+        </ion-text>
+      </ion-list>
+
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="onLogin(loginForm)" type="submit" expand="block">Đăng nhập</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
+
+</ion-content>

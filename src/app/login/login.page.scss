@@ -1,0 +1,30 @@
+.login-logo {
+  padding: 20px 0;
+  min-height: 200px;
+  text-align: center;
+}
+
+.login-logo img {
+  max-width: 150px;
+}
+
+.list {
+  margin-bottom: 0;
+}
+ion-content,ion-list, ion-item {
+  --background: none !important;
+}
+.auth-page {
+  // --ion-background-color: #fdcd3b;
+  --ion-background-image: url("../../assets/img/bg.jpg") no-repeat;
+  --ion-background-size: cover;
+  --ion-top: 0;
+  --ion-left: 0;
+  --ion-bottom: 0;
+  --ion-right: 0;
+  --ion-position: absolute;
+  --ion-z-index: 0;
+}
+.list-md {
+  background: none !important;
+}
