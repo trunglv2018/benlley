@@ -23,7 +23,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     HttpClientModule,
     NgCircleProgressModule.forRoot({
       // set defaults here
-      "backgroundColor": "#ff0011",
+      "backgroundColor": "#fdcd3b",
       "radius": 60,
       "maxPercent": 200,
       "units": " Point",

@@ -8,11 +8,18 @@ import { DeviceStatus } from '../models/device_status.model';
 import { CustomerService } from '../services/customer.service';
 import { SocketService } from '../services/socket.service';
 
+// interface CurrentState {
+//   V1: boolean
+//   V2: boolean
+//   L1: boolean
+//   L2: boolean
+// }
+
 interface CurrentState {
-  V1: boolean
-  V2: boolean
-  L1: boolean
-  L2: boolean
+  V1: number
+  V2: number
+  L1: number
+  L2: number
 }
 
 @Component({
@@ -25,10 +32,10 @@ export class DeviceStatusPage implements OnInit, OnDestroy {
   deviceStatus: DeviceStatus = <DeviceStatus>{}
   deviceID
   currentState = <CurrentState>{
-    V1: false,
-    V2: false,
-    L1: false,
-    L2: false,
+    V1: 0,
+    V2: 0,
+    L1: 0,
+    L2: 0,
   }
   ws: WebSocketSubject<any>
   constructor(
@@ -55,7 +62,6 @@ export class DeviceStatusPage implements OnInit, OnDestroy {
   }
 
   onControl() {
-    console.log(this.currentState)
     this.deviceStatus.Command = "CONTROL"
     this.setDeviceStatus()
     this.setDefaultTime()
@@ -77,17 +83,19 @@ export class DeviceStatusPage implements OnInit, OnDestroy {
   }
 
   setCurrentState() {
-    this.currentState.V1 = this.deviceStatus.V1 == 1 ? true : false
-    this.currentState.V2 = this.deviceStatus.V2 == 1 ? true : false
-    this.currentState.L1 = this.deviceStatus.L1 == 1 ? true : false
-    this.currentState.L2 = this.deviceStatus.L2 == 1 ? true : false
+    // this.currentState.V1 = this.deviceStatus.V1 == 1 ? true : false
+    // this.currentState.V2 = this.deviceStatus.V2 == 1 ? true : false
+    // this.currentState.L1 = this.deviceStatus.L1 == 1 ? true : false
+    // this.currentState.L2 = this.deviceStatus.L2 == 1 ? true : false
+
+    this.currentState.V1 = this.deviceStatus.V1
+    this.currentState.V2 = this.deviceStatus.V2
   }
 
   setDeviceStatus() {
-    this.deviceStatus.V1 = this.currentState.V1 ? 1 : 0
-    this.deviceStatus.V2 = this.currentState.V2 ? 1 : 0
-    this.deviceStatus.L1 = this.currentState.L1 ? 1 : 0
-    this.deviceStatus.L2 = this.currentState.L2 ? 1 : 0
+    console.log('before ', this.currentState)
+   
+    console.log('after ', this.currentState)
 
     // TH van 1 bật set đèn 1 bật luôn
     // if (this.currentState.V1) {
@@ -106,12 +114,21 @@ export class DeviceStatusPage implements OnInit, OnDestroy {
     //   this.deviceStatus.L2 = 0
     // }
 
-    this.currentState.L1 = this.currentState.V1
-    this.deviceStatus.L1 = this.currentState.V1 ? 1 : 0
-    this.currentState.L2 = this.currentState.V2
-    this.deviceStatus.L2 = this.currentState.V2 ? 1 : 0
   }
 
+  onControlVan1() {
+    this.currentState.V1 = (this.currentState.V1 == 1 ? 0 : 1)
+    this.deviceStatus.V1 = this.currentState.V1
+    this.deviceStatus.L1 = this.currentState.V1
+
+  } 
+
+  onControlVan2() {
+    this.currentState.V2 = (this.currentState.V2 == 1 ? 0 : 1)
+    this.deviceStatus.V2 = this.currentState.V2
+    this.deviceStatus.L2 = this.currentState.V2
+  }
+  
   setDefaultTime() {
     this.deviceStatus.Time = {
       Hours: 0,
@@ -130,6 +147,6 @@ export class DeviceStatusPage implements OnInit, OnDestroy {
     });
     toast.present();
   }
- 
-  
+
+
 }

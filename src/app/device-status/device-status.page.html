@@ -57,8 +57,9 @@
       </ion-item-divider>
       <ion-item>
         <ion-label>Van 1</ion-label>
-        <ion-toggle *ngIf="deviceStatus" [(ngModel)]="currentState.V1" (ionChange)="onControl()">
-        </ion-toggle>
+        <!-- <ion-toggle *ngIf="deviceStatus" [(ngModel)]="currentState.V1" (ionChange)="onControl()">
+        </ion-toggle> -->
+        <ion-button (click)="onControlVan1()">{{currentState.V1==1?'Đóng':'Mở'}}</ion-button>
         <ion-text color="success">
           <h4 color="success" *ngIf="!deviceStatus">NA</h4>
         </ion-text>
@@ -66,8 +67,9 @@
 
       <ion-item>
         <ion-label>Van 2</ion-label>
-        <ion-toggle *ngIf="deviceStatus" [(ngModel)]="currentState.V2" (ionChange)="onControl()">
-        </ion-toggle>
+        <!-- <ion-toggle *ngIf="deviceStatus" [(ngModel)]="currentState.V2" (ionChange)="onControl()">
+        </ion-toggle> -->
+        <ion-button (click)="onControlVan2()">{{currentState.V2==1?'Đóng':'Mở'}}</ion-button>
         <ion-text color="success">
           <h4 color="success" *ngIf="!deviceStatus">NA</h4>
         </ion-text>
