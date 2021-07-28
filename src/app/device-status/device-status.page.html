@@ -27,25 +27,26 @@
     <ion-row size="3">
       <ion-col class="ion-padding">
         <circle-progress [percent]="deviceStatus.R1" [radius]="30" [outerStrokeWidth]="6" [innerStrokeWidth]="3"
-          [outerStrokeColor]="'#fff'" [innerStrokeColor]="'#fff'" [animation]="true" [animationDuration]="300"
-          units="&deg;C">
+          [outerStrokeColor]="'#fff'" [toFixed]="1" [innerStrokeColor]="'#fff'" [animation]="true"
+          [animationDuration]="300" units="&deg;C">
         </circle-progress>
 
         <h6 style="text-align: center;">Zone 1</h6>
       </ion-col>
       <ion-col class="ion-padding">
         <circle-progress [percent]="deviceStatus.R2" [radius]="30" [outerStrokeWidth]="6" [innerStrokeWidth]="3"
-          [outerStrokeColor]="'#fff'" [innerStrokeColor]="'#fff'" [animation]="true" [animationDuration]="300"
-          units="&deg;C">
+          [outerStrokeColor]="'#fff'" [toFixed]="1" [innerStrokeColor]="'#fff'" [animation]="true"
+          [animationDuration]="300" units="&deg;C">
         </circle-progress>
         <h6 style="text-align: center;">Zone 2</h6>
       </ion-col>
       <ion-col class="ion-padding">
-        <circle-progress [percent]="deviceStatus.R3" [showTitle]="deviceStatus&&(deviceStatus&&deviceStatus.R1!==210)" [units]="!deviceStatus||(deviceStatus&&deviceStatus.R1==210)?'ERR':'&deg;C'" [radius]="30" [outerStrokeWidth]="6" [innerStrokeWidth]="3"
-          [outerStrokeColor]="'#fff'" [innerStrokeColor]="'#fff'" [animation]="true" [animationDuration]="300"
-          units="&deg;C">
+        <circle-progress [percent]="deviceStatus.R3" [showTitle]="deviceStatus&&(deviceStatus&&deviceStatus.R1!==210)"
+          [units]="!deviceStatus||(deviceStatus&&deviceStatus.R1==210)?'ERR':'&deg;C'" [radius]="30"
+          [outerStrokeWidth]="6" [innerStrokeWidth]="3" [outerStrokeColor]="'#fff'" [toFixed]="1"
+          [innerStrokeColor]="'#fff'" [animation]="true" [animationDuration]="300" units="&deg;C">
         </circle-progress>
-        <h6 style="text-align: center;">Heatpump</h6>
+        <h6 style="text-align: center;">T3</h6>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -53,27 +54,34 @@
   <ion-list>
     <ion-item-group>
       <ion-item-divider>
-        <ion-label>Điều khiển van</ion-label>
+        <ion-label>Điều khiển</ion-label>
       </ion-item-divider>
       <ion-item>
-        <ion-label>Van 1</ion-label>
+        <ion-label>Switch Server</ion-label>
         <!-- <ion-toggle *ngIf="deviceStatus" [(ngModel)]="currentState.V1" (ionChange)="onControl()">
         </ion-toggle> -->
-        <ion-button (click)="onControlVan1()">{{currentState.V1==1?'Đóng':'Mở'}}</ion-button>
+        <ion-button (click)="presentActionSheet()">
+          {{deviceSetting.ST==1?'OFF':''}}
+          {{deviceSetting.ST==2?'Auto':''}}
+          {{deviceSetting.ST==3?'Timeframe & Forced':''}}
+          {{deviceSetting.ST==4?'Forced':''}}
+        </ion-button>
         <ion-text color="success">
           <h4 color="success" *ngIf="!deviceStatus">NA</h4>
         </ion-text>
       </ion-item>
 
       <ion-item>
-        <ion-label>Van 2</ion-label>
+        <ion-label>Van By Pass</ion-label>
         <!-- <ion-toggle *ngIf="deviceStatus" [(ngModel)]="currentState.V2" (ionChange)="onControl()">
         </ion-toggle> -->
-        <ion-button (click)="onControlVan2()">{{currentState.V2==1?'Đóng':'Mở'}}</ion-button>
-        <ion-text color="success">
-          <h4 color="success" *ngIf="!deviceStatus">NA</h4>
-        </ion-text>
-
+        <ion-button (click)="openValveByPass()">{{valveSetting.ST==1?'Mở':'Đóng'}}</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-label>Bù nhiệt cưỡng bức</ion-label>
+        <!-- <ion-toggle *ngIf="deviceStatus" [(ngModel)]="currentState.V2" (ionChange)="onControl()">
+        </ion-toggle> -->
+        <ion-button (click)="buNhietCuongBuc()">{{buNhietSetting.ST==1?'Mở':'Đóng'}}</ion-button>
       </ion-item>
     </ion-item-group>
     <!-- <ion-item-group>

@@ -18,4 +18,12 @@ export class CustomerService {
     controlDevice(status: DeviceStatus) {
         return this.apiService.post('/customer/device/control', status)
     }
+
+    getSetting(id, command) {
+        return this.apiService.get(`/admin/device/setting`, { "ID": id, "Command": command })
+    }
+
+    commandToDevice(status) {
+        return this.apiService.post(`/admin/device/command`, status)
+    }
 }
